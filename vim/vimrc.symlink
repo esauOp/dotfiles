@@ -153,3 +153,22 @@ hi SpecialKey cterm=NONE ctermfg=darkgrey gui=NONE guifg=#000066
 
 let mapleader = ","
 
+" The Silver Searcher
+if executable('ag')
+let g:ai" Use ag over grepe = "\ua0"
+        set grepprg=ag\ --nogroup\ --nocolor
+
+" let g:" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+let g:ailet g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+" let g:airline_right_sep = '«'
+let g:ai" ag is fast enough that CtrlP doesn't need to cache
+" let g:let g:ctrlp_use_caching = 0
+" let g:airline_symbols.linenr = '␊'
+
+" bind K to grep word under cursor¶'
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" bind \ (backward slash) to grep shortcut
+command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+
+nnoremap \ :Ag<SPACE>

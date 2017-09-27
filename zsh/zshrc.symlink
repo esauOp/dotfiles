@@ -25,5 +25,8 @@ ZSH_THEME="fishy"
 
 source $ZSH/oh-my-zsh.sh
 
+# Aliases
+source $HOME/.alias
+
 AUTOSUGGESTION_HIGHLIGHT_CURSOR=1
 AUTOSUGGESTION_ACCEPT_RIGHT_ARROW=1
