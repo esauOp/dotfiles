@@ -7,11 +7,15 @@ set encoding=utf-8
 let base16colorspace=256  " Access colors present in 256 colorspace
 set t_Co=256
 
+filetype plugin indent on    " required
+
 " size of a hard tabstop
 set tabstop=4
 
 " size of an "indent"
 set shiftwidth=4
+
+set expandtab
 
 " a combination of spaces and tabs are used to simulate tab stops at a width
 " other than the (hard)tabstop
@@ -45,7 +49,7 @@ Plugin 'trusktr/seti.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
-filetype plugin indent on    " required
+
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
@@ -72,6 +76,7 @@ execute pathogen#infect('bundle/{}', '~/vim/bundle/{}')
 " ctrlp.vim
 " vim-elixir
 " vim-ident-guides
+" vim-multiple-cursor
 
 syntax on
 filetype plugin indent on
@@ -155,17 +160,17 @@ let mapleader = ","
 
 " The Silver Searcher
 if executable('ag')
-let g:ai" Use ag over grepe = "\ua0"
-        set grepprg=ag\ --nogroup\ --nocolor
+	" Use ag over grep
+	set grepprg=ag\ --nogroup\ --nocolor
 
-" let g:" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-let g:ailet g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-" let g:airline_right_sep = '«'
-let g:ai" ag is fast enough that CtrlP doesn't need to cache
-" let g:let g:ctrlp_use_caching = 0
-" let g:airline_symbols.linenr = '␊'
+	" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
-" bind K to grep word under cursor¶'
+	" ag is fast enough that CtrlP doesn't need to cache
+	let g:ctrlp_use_caching = 0
+endif
+
+" bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 " bind \ (backward slash) to grep shortcut
