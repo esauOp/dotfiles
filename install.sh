@@ -28,6 +28,8 @@ apps=(
   coreutils
   diff-so-fancy
   dockutil
+  erlang
+  elixir
   ffmpeg
   fasd
   gifsicle
@@ -36,19 +38,23 @@ apps=(
   gnu-sed --with-default-names
   grep --with-default-names
   hub
+  htop
   httpie
   imagemagick --with-webp
   jq
   lynx
   mackup
+  mitmproxy
   nano
   node
   pandoc
   peco
+  postgresql
   psgrep
   python
   rvm
   shellcheck
+  siege
   ssh-copy-id
   the_silver_searcher
   tmux
@@ -74,6 +80,10 @@ brew cleanup
 
 #brew cask cleanup
 
+
+createuser -d postgres              # create the default 'postgres'
+
+
 # Bunch of symlinks
 ln -sfv ~/dotfiles/zsh/zshrc.symlink ~/.zsh
 ln -sfv ~/dotfiles/vim/vimrc.symlink ~/.vimrc
@@ -83,6 +93,9 @@ ln -sfv ~/dotfiles/git/gitconfig ~/.gitconfig
 
 # Install oh-my-zsh via wget
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+
+# ZSH auto sugestions commands
+git clone git://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 
 # Vim plugins manager
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
