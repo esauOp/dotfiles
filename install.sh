@@ -101,6 +101,9 @@ cp ~/dotfiles/zsh/themes/my-fishy.zsh-theme ~/.oh-my-zsh/themes/my-fishy.zsh-the
 git clone git://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
+
+git clone https://github.com/zsh-users/zsh-history-substring-search ~/.zsh/zsh-history-substring-search
+
 # Vim plugins manager
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 vim +BundleInstall +qall
@@ -122,3 +125,12 @@ packages=(
 )
 
 npm install -g "${packages[@]}"
+
+# Install porwerline fonts
+git clonelone https://github.com/powerline/fonts.git --depth=1 ~/fonts
+# install
+cd ~/fonts
+./install.sh
+# clean-up a bit
+cd ..
+rm -rf fonts

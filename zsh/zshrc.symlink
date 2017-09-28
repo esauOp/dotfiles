@@ -10,19 +10,35 @@ export PATH=$PATH:/usr/local/node/bin
 
 test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
 
+# Load zsh-syntax-highlighting.
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 # Load zsh-autosuggestions.
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+zle-line-init() {
+  zle autosuggest-start
+}
+zle -N zle-line-init
+export AUTOSUGGESTION_HIGHLIGHT_COLOR=fg=246
 
-# Load zsh-syntax-highlighting.
-source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 # Enabling plugins
-plugins=(git bundler osx rake ruby)
+plugins=(git npm bundler osx rake ruby)
 
 # Set the Theme
 ZSH_THEME="my-fishy"
 
 source $ZSH/oh-my-zsh.sh
+
+# Better history
+# # Credits to https://coderwall.com/p/jpj_6q/zsh-better-history-searching-with-arrow-keys
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search # Up
+bindkey "^[[B" down-line-or-beginning-search # Down
 
 # Aliases
 source ~/.alias
