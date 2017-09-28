@@ -94,6 +94,8 @@ ln -sfv ~/dotfiles/git/gitconfig ~/.gitconfig
 # Install oh-my-zsh via wget
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 
+cp ~/dotfiles/zsh/themes/my-fishy.zsh-theme ~/.oh-my-zsh/themes/my-fishy.zsh-theme
+
 # ZSH auto sugestions commands
 git clone git://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 
