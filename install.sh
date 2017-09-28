@@ -88,6 +88,7 @@ createuser -d postgres              # create the default 'postgres'
 ln -sfv ~/dotfiles/zsh/zshrc.symlink ~/.zsh
 ln -sfv ~/dotfiles/vim/vimrc.symlink ~/.vimrc
 ln -sfv ~/dotfiles/system/alias ~/.alias
+ln -sfv ~/dotfiles/system/functions ~/.functions
 ln -sfv ~/dotfiles/system/tmux.conf ~/.tmux.conf
 ln -sfv ~/dotfiles/git/gitconfig ~/.gitconfig
 
