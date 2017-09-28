@@ -2,7 +2,21 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/vundle
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'    " Required
+Bundle 'kien/ctrlp.vim'    " Required
+Bundle 'mattn/emmet-vim'    " Required
+Bundle 'scrooloose/nerdtree'    " Required
+Bundle 'vim-syntastic/syntastic'    " Required
+Bundle 'edkolev/tmuxline.vim'    " Required
+Bundle 'vim-airline/vim-airline'    " Required
+Bundle 'elixir-editors/vim-elixir'    " Required
+Bundle 'tpope/vim-fugitive'    " Required
+Bundle 'airblade/vim-gitgutter'    " Required
+Bundle 'jistr/vim-nerdtree-tabs'    " Required
+
 set encoding=utf-8
 let base16colorspace=256  " Access colors present in 256 colorspace
 set t_Co=256
@@ -21,35 +35,6 @@ set expandtab
 " other than the (hard)tabstop
 set softtabstop=4
 
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-" call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" Plugin 'flazz/vim-colorschemes'
-Plugin 'trusktr/seti.vim'
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-"  Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
-" Git plugin not hosted on GitHub
-"  Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-"  Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-"  Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Avoid a name conflict with L9
-"  Plugin 'user/L9', {'name': 'newL9'}
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
@@ -66,17 +51,6 @@ syntax enable
 " colorscheme monokai
 let g:molokai_original = 1
 set background=dark
-
-execute pathogen#infect('bundle/{}', '~/vim/bundle/{}')
-" vundle
-" nerdtree
-" fugitive
-" syntastic
-" emmet
-" ctrlp.vim
-" vim-elixir
-" vim-ident-guides
-" vim-multiple-cursor
 
 syntax on
 filetype plugin indent on

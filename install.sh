@@ -51,10 +51,12 @@ apps=(
   shellcheck
   ssh-copy-id
   the_silver_searcher
+  tmux
   tree
   unar
   wget
   wifi-password
+  zsh
 )
 
 brew install "${apps[@]}"
@@ -76,8 +78,15 @@ brew cleanup
 ln -sfv ~/dotfiles/zsh/zshrc.symlink ~/.zsh
 ln -sfv ~/dotfiles/vim/vimrc.symlink ~/.vimrc
 ln -sfv ~/dotfiles/system/alias ~/.alias
+ln -sfv ~/dotfiles/system/tmux.conf ~/.tmux.conf
 ln -sfv ~/dotfiles/git/gitconfig ~/.gitconfig
 
+# Install oh-my-zsh via wget
+sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+
+# Vim plugins manager
+git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+vim +BundleInstall +qall
 
 # Globally install with npm
 
