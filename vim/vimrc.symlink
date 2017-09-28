@@ -5,17 +5,17 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-Bundle 'gmarik/vundle'    " Required
-Bundle 'kien/ctrlp.vim'    " Required
-Bundle 'mattn/emmet-vim'    " Required
-Bundle 'scrooloose/nerdtree'    " Required
-Bundle 'vim-syntastic/syntastic'    " Required
-Bundle 'edkolev/tmuxline.vim'    " Required
-Bundle 'vim-airline/vim-airline'    " Required
-Bundle 'elixir-editors/vim-elixir'    " Required
-Bundle 'tpope/vim-fugitive'    " Required
-Bundle 'airblade/vim-gitgutter'    " Required
-Bundle 'jistr/vim-nerdtree-tabs'    " Required
+Bundle 'gmarik/vundle'
+Bundle 'kien/ctrlp.vim'
+Bundle 'mattn/emmet-vim'
+Bundle 'scrooloose/nerdtree'
+Bundle 'vim-syntastic/syntastic'
+Bundle 'edkolev/tmuxline.vim'
+Bundle 'vim-airline/vim-airline'
+Bundle 'elixir-editors/vim-elixir'
+Bundle 'tpope/vim-fugitive'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'jistr/vim-nerdtree-tabs'
 
 set encoding=utf-8
 let base16colorspace=256  " Access colors present in 256 colorspace
