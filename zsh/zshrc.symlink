@@ -1,32 +1,35 @@
+export EDITOR=vim
+
+export TERM="xterm-256color"
+
 ZSH=$HOME/.oh-my-zsh
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
-# Load zsh-syntax-highlighting.
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 # Load zsh-autosuggestions.
 source ~/.zsh/zsh-autosuggestions/autosuggestions.zsh
 
-# Load
-source ~/.zsh/zsh-history-search/zsh-history-substring-search.zsh
+export PATH=$PATH:/usr/local/node/bin
 
-zle-line-init() {
-	zle autosuggest-start
-}
-zle -N zle-line-init
+test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
 
+# Load zsh-autosuggestions.
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Load zsh-syntax-highlighting.
+source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Enabling plugins
 plugins=(git bundler osx rake ruby)
 
 # Set the Theme
-ZSH_THEME="fishy"
+ZSH_THEME="my-fishy"
 
 source $ZSH/oh-my-zsh.sh
 
 # Aliases
-source $HOME/.alias
+source ~/.alias
 
 AUTOSUGGESTION_HIGHLIGHT_CURSOR=1
 AUTOSUGGESTION_ACCEPT_RIGHT_ARROW=1
+
