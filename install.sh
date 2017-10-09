@@ -57,6 +57,7 @@ apps=(
   siege
   ssh-copy-id
   the_silver_searcher
+  tig
   tmux
   tree
   unar
@@ -134,3 +135,10 @@ cd ~/fonts
 # clean-up a bit
 cd ..
 rm -rf fonts
+
+# Terminal System Monitory
+wget https://github.com/nicolargo/glances/archive/v2.11.tar.gz -O - | tar xz
+cd glances-2.11
+sudo python setup.py install
+
+cd ..
