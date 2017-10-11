@@ -49,6 +49,7 @@ apps=(
   node
   pandoc
   peco
+  pgcli
   postgresql
   psgrep
   python
