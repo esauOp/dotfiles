@@ -62,6 +62,7 @@ apps=(
   wget
   wifi-password
   zsh
+  zsh-completions
 )
 
 brew install "${apps[@]}"
@@ -70,7 +71,8 @@ brew install "${apps[@]}"
 brew cleanup
 
 # Install GUI applications
-brew install caskroom/cask/brew-cask
+# brew install caskroom/cask/brew-cask
+brew tap caskroom/cask
 
 # Great homebrew formulas manager
 brew cask install launchrocket
