@@ -90,7 +90,6 @@ apps=(
   macdown
   iterm2
   vlc
-  google-drive
 )
 
 for app in "${apps[@]}"
@@ -130,9 +129,6 @@ brew cask install ${fonts[@]}
 brew cask cleanup
 
 
-createuser -d postgres              # create the default 'postgres'
-
-
 # Bunch of symlinks
 ln -sfv ~/dotfiles/zsh/zshrc.symlink ~/.zshrc
 ln -sfv ~/dotfiles/vim/vimrc.symlink ~/.vimrc
@@ -140,11 +136,6 @@ ln -sfv ~/dotfiles/system/alias ~/.alias
 ln -sfv ~/dotfiles/system/functions ~/.functions
 ln -sfv ~/dotfiles/system/tmux.conf ~/.tmux.conf
 ln -sfv ~/dotfiles/git/gitconfig ~/.gitconfig
-
-# Install oh-my-zsh via wget
-sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-
-cp ~/dotfiles/zsh/themes/my-fishy.zsh-theme ~/.oh-my-zsh/themes/my-fishy.zsh-theme
 
 # ZSH auto sugestions commands
 git clone git://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
@@ -158,7 +149,6 @@ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 vim +BundleInstall +qall
 
 # Globally install with npm
-
 packages=(
   get-port-cli
   gtop
@@ -192,3 +182,8 @@ cd glances-2.11
 sudo python setup.py install
 
 cd ..
+
+# Install oh-my-zsh via wget
+sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+
+cp ~/dotfiles/zsh/themes/my-fishy.zsh-theme ~/.oh-my-zsh/themes/my-fishy.zsh-theme

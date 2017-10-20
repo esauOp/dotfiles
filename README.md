@@ -14,3 +14,8 @@ sh ./install.sh
 ```
 chsh -s /bin/zsh
 ```
+4.- Create the default `postgres` user.
+```
+createuser -d postgres
+```
+
