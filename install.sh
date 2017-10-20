@@ -12,10 +12,6 @@ then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-brew tap homebrew/versions
-brew tap homebrew/dupes
-brew tap Goles/battery
-
 brew update
 brew upgrade --all
 
@@ -37,6 +33,7 @@ apps=(
   git-extras
   gnu-sed --with-default-names
   grep --with-default-names
+  heroku-toolbelt
   hub
   htop
   httpie
@@ -73,14 +70,62 @@ brew install "${apps[@]}"
 brew cleanup
 
 # Install GUI applications
-#brew tap caskroom/cask
-#brew install brew-cask
+brew install caskroom/cask/brew-cask
+
+# Great homebrew formulas manager
+brew cask install launchrocket
+
 #brew tap caskroom/versions
 
-#brew cask install atom
-#brew cask install vlc
+#Install apps
+apps=(
+  slack
+  spotify
+  google-chrome
+  dropbox
+  appcleaner
+  firefox
+  macdown
+  iterm2
+  vlc
+  google-drive
+)
 
-#brew cask cleanup
+for app in "${apps[@]}"
+do
+	printf "Should I install %s\n" $app
+	echo "Type Y to accept: \c"
+	read line
+	if [ "$line" = Y ] || [ "$line" = y ]; then
+		brew cask install --appdir="/Applications" $app
+	fi
+done
+
+#Installing fonts
+brew tap caskroom/fonts
+
+fonts=(
+  font-m-plus
+  font-clear-sans
+  font-roboto
+  font-open-sans
+  font-source-sans-pro
+  font-lobster
+  font-alegreya
+  font-montserrat
+  font-inconsolata
+  font-pt-sans
+  font-quattrocento-sans
+  font-quicksand
+  font-raleway
+  font-sorts-mill-goudy
+  font-ubuntu
+)
+
+# Install fonts
+brew cask install ${fonts[@]}
+
+brew cask cleanup
 
 
 createuser -d postgres              # create the default 'postgres'
@@ -129,10 +174,12 @@ packages=(
 npm install -g "${packages[@]}"
 
 # Install porwerline fonts
-git clonelone https://github.com/powerline/fonts.git --depth=1 ~/fonts
+git clone https://github.com/powerline/fonts.git --depth=1 ~/fonts
+
 # install
 cd ~/fonts
 ./install.sh
+
 # clean-up a bit
 cd ..
 rm -rf fonts
