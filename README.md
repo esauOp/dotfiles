@@ -2,6 +2,9 @@
 Here you gonna find my current MBP setup for work.
 
 # OS X setup
+You need to have XCode or, at the very minimum, the XCode Command Line Tools, which are available as a much smaller download.
+Execute sudo xcodebuild -license and follow the instructions to accept the XCode agreement. After that you just run xcode-select --install and proceed with the installation.
+
 1.- Clone this project:
 ```
 git clone https://github.com/esauOp/dotfiles.git ~/dotfiles && cd ~/dotfiles
