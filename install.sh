@@ -90,6 +90,7 @@ apps=(
   macdown
   iterm2
   vlc
+  postman
 )
 
 for app in "${apps[@]}"
