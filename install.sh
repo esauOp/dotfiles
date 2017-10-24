@@ -81,6 +81,7 @@ brew cask install launchrocket
 
 #Install apps
 apps=(
+  arduino
   slack
   spotify
   google-chrome
