@@ -22,3 +22,8 @@ chsh -s /bin/zsh
 createuser -d postgres
 ```
 
+### Don't forget generate your SSH Key
+
+[GitHub Help](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)
+
+

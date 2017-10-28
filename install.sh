@@ -88,6 +88,7 @@ apps=(
   dropbox
   appcleaner
   firefox
+  gimp
   macdown
   iterm2
   vlc
