@@ -179,6 +179,17 @@ cd ~/fonts
 cd ..
 rm -rf fonts
 
+# Install porwerline fonts
+git clone https://github.com/ryanoasis/nerd-fonts.git --depth=1 ~/nerd-fonts
+
+# install
+cd ~/nerd-fonts
+./install.sh
+
+# clean-up a bit
+cd ..
+rm -rf nerd-fonts
+
 # Terminal System Monitory
 wget https://github.com/nicolargo/glances/archive/v2.11.tar.gz -O - | tar xz
 cd glances-2.11
@@ -190,3 +201,10 @@ cd ..
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 
 cp ~/dotfiles/zsh/themes/my-fishy.zsh-theme ~/.oh-my-zsh/themes/my-fishy.zsh-theme
+
+# Powerline theme
+
+git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+
+# Edit your ~/.zshrc
+# ZSH_THEME="powerlevel9k/powerlevel9k"
