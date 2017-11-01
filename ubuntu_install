@@ -123,7 +123,6 @@ apt_packages+=(
   imagemagick
   jq
   nmap
-  npm
   postgresql
   python-pip
   silversearcher-ag
@@ -220,7 +219,7 @@ fi
 # Installing NodeJs
 curl -sL https://deb.nodesource.com/setup_6.x | sudo bash -
 sudo apt-get update
-apt-get install nodejs npm
+sudo apt-get install -y nodejs
 
 # Bunch of symlinks
 ln -sfv ~/dotfiles/zsh/zshrc.symlink ~/.zshrc
@@ -247,16 +246,16 @@ packages=(
   gtop
   historie
   nodemon
-  npm
   release-it
   spot
   superstatic
   svgo
   tldr
-  @angular/cli
 )
 
 sudo npm install -g "${packages[@]}"
+
+sudo npm install -g @angular/cli
 
 # Install porwerline fonts
 git clone https://github.com/powerline/fonts.git --depth=1 ~/fonts
