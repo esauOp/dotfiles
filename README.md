@@ -13,6 +13,10 @@ git clone https://github.com/esauOp/dotfiles.git ~/dotfiles && cd ~/dotfiles
 ```
 sh ./install.sh
 ```
+2.- If you are an Ubuntu user, install script by
+```
+bash ./ubuntu_install
+```
 3.- Change your shell
 ```
 chsh -s /bin/zsh

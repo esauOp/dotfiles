@@ -1,0 +1,282 @@
+#!/bin/bash
+
+#
+#Set Colors
+#
+
+bold=$(tput bold)
+underline=$(tput sgr 0 1)
+reset=$(tput sgr0)
+
+purple=$(tput setaf 171)
+red=$(tput setaf 1)
+green=$(tput setaf 76)
+tan=$(tput setaf 3)
+blue=$(tput setaf 38)
+
+
+# Where the magic happens.
+export DOTFILES=~/dotfiles
+
+# Create caches dir and init subdir, if they don't already exist.
+mkdir -p "$DOTFILES/caches/init"
+
+# Logging stuff.
+function e_header()   { echo -e "\n\033[1m$@\033[0m"; }
+function e_success()  { echo -e " \033[1;32m✔\033[0m  $@"; }
+function e_error()    { echo -e " \033[1;31m✖\033[0m  $@"; }
+function e_arrow()    { echo -e " \033[1;34m➜\033[0m  $@"; }
+
+# Array filter. Calls filter_fn for each item ($1) and index ($2) in array_name
+# array, and prints all values for which filter_fn returns a non-zero exit code
+# to stdout. If filter_fn is omitted, input array items that are empty strings
+# will be removed.
+# Usage: array_filter array_name [filter_fn]
+# Eg. mapfile filtered_arr < <(array_filter source_arr)
+function array_filter() { __array_filter 1 "$@"; }
+# Works like array_filter, but outputs array indices instead of array items.
+function array_filter_i() { __array_filter 0 "$@"; }
+# The core function. Wheeeee.
+function __array_filter() {
+  local __i__ __val__ __mode__ __arr__
+  __mode__=$1; shift; __arr__=$1; shift
+  for __i__ in $(eval echo "\${!$__arr__[@]}"); do
+    __val__="$(eval echo "\${$__arr__[__i__]}")"
+    if [[ "$1" ]]; then
+      "$@" "$__val__" $__i__ >/dev/null
+    else
+      [[ "$__val__" ]]
+    fi
+    if [[ "$?" == 0 ]]; then
+      if [[ $__mode__ == 1 ]]; then
+        eval echo "\"\${$__arr__[__i__]}\""
+      else
+        echo $__i__
+      fi
+    fi
+  done
+}
+
+# Given strings containing space-delimited words A and B, "setdiff A B" will
+# return all words in A that do not exist in B. Arrays in bash are insane
+# (and not in a good way).
+# From http://stackoverflow.com/a/1617303/142339
+function setdiff() {
+  local debug skip a b
+  if [[ "$1" == 1 ]]; then debug=1; shift; fi
+  if [[ "$1" ]]; then
+    local setdiff_new setdiff_cur setdiff_out
+    setdiff_new=($1); setdiff_cur=($2)
+  fi
+  setdiff_out=()
+  for a in "${setdiff_new[@]}"; do
+    skip=
+    for b in "${setdiff_cur[@]}"; do
+      [[ "$a" == "$b" ]] && skip=1 && break
+    done
+    [[ "$skip" ]] || setdiff_out=("${setdiff_out[@]}" "$a")
+  done
+  [[ "$debug" ]] && for a in setdiff_new setdiff_cur setdiff_out; do
+    echo "$a ($(eval echo "\${#$a[*]}")) $(eval echo "\${$a[*]}")" 1>&2
+  done
+  [[ "$1" ]] && echo "${setdiff_out[@]}"
+}
+
+# Ask for the administrator password upfront
+sudo -v
+
+
+# Install packages
+apt_keys=()
+apt_source_files=()
+apt_source_texts=()
+apt_packages=()
+deb_installed=()
+deb_sources=()
+
+apt_packages+=(
+  autoconf
+  build-essential
+  bison
+  libssl-dev
+  libyaml-dev
+  libreadline6-dev
+  libncurses5-dev
+  libffi-dev
+  libgdbm3
+  libgdbm-dev
+  zlib1g-dev
+  libav-tools
+  x11-xserver-utils
+  xdotool
+  wininfo
+  wmctrl
+  python-gobject
+  python-cairo
+  xdg-utils
+  silentcast
+  cowsay
+  curl
+  git-core
+  htop
+  id3tool
+  imagemagick
+  jq
+  nmap
+  npm
+  postgresql
+  python-pip
+  silversearcher-ag
+  sl
+  telnet
+  tmux
+  tree
+  vim
+  zsh
+  vlc
+  xclip
+  zenmap
+)
+
+
+
+# https://www.ubuntuupdates.org/ppa/google_chrome
+apt_keys+=(https://dl-ssl.google.com/linux/linux_signing_key.pub)
+apt_source_files+=(google-chrome)
+apt_source_texts+=("deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main")
+apt_packages+=(google-chrome-stable)
+
+# https://www.spotify.com/us/download/linux/
+apt_keys+=('--keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886')
+apt_source_files+=(spotify)
+apt_source_texts+=("deb http://repository.spotify.com stable non-free")
+apt_packages+=(spotify-client)
+
+
+####################
+# ACTUALLY DO THINGS
+####################
+
+# Add APT keys.
+keys_cache=$DOTFILES/caches/init/apt_keys
+IFS=$'\n' GLOBIGNORE='*' command eval 'setdiff_cur=($(<$keys_cache))'
+setdiff_new=("${apt_keys[@]}"); setdiff; apt_keys=("${setdiff_out[@]}")
+unset setdiff_new setdiff_cur setdiff_out
+
+if (( ${#apt_keys[@]} > 0 )); then
+  e_header "Adding APT keys (${#apt_keys[@]})"
+  for key in "${apt_keys[@]}"; do
+    e_arrow "$key"
+    if [[ "$key" =~ -- ]]; then
+      sudo apt-key adv $key
+    else
+      wget -qO- $key | sudo apt-key add -
+    fi && \
+    echo "$key" >> $keys_cache
+  done
+fi
+
+# Add APT sources.
+function __temp() { [[ ! -e /etc/apt/sources.list.d/$1.list ]]; }
+source_i=($(array_filter_i apt_source_files __temp))
+
+if (( ${#source_i[@]} > 0 )); then
+  e_header "Adding APT sources (${#source_i[@]})"
+  for i in "${source_i[@]}"; do
+    source_file=${apt_source_files[i]}
+    source_text=${apt_source_texts[i]}
+    if [[ "$source_text" =~ ppa: ]]; then
+      e_arrow "$source_text"
+      sudo add-apt-repository -y $source_text
+    else
+      e_arrow "$source_file"
+      sudo sh -c "echo '$source_text' > /etc/apt/sources.list.d/$source_file.list"
+    fi
+  done
+fi
+
+# Update APT.
+e_header "Updating APT"
+sudo apt-get -qq update
+
+# Only do a dist-upgrade on initial install, otherwise do an upgrade.
+e_header "Upgrading APT"
+sudo apt-get -qy upgrade
+
+# Install APT packages.
+installed_apt_packages="$(dpkg --get-selections | grep -v deinstall | awk 'BEGIN{FS="[\t:]"}{print $1}' | uniq)"
+apt_packages=($(setdiff "${apt_packages[*]}" "$installed_apt_packages"))
+
+if (( ${#apt_packages[@]} > 0 )); then
+  e_header "Installing APT packages (${#apt_packages[@]})"
+  for package in "${apt_packages[@]}"; do
+    e_arrow "$package"
+    [[ "$(type -t preinstall_$package)" == function ]] && preinstall_$package
+    sudo apt-get -qq install "$package" && \
+    [[ "$(type -t postinstall_$package)" == function ]] && postinstall_$package
+  done
+fi
+
+# Installing NodeJs
+curl -sL https://deb.nodesource.com/setup_6.x | sudo bash -
+sudo apt-get update
+apt-get install nodejs npm
+
+# Bunch of symlinks
+ln -sfv ~/dotfiles/zsh/zshrc.symlink ~/.zshrc
+ln -sfv ~/dotfiles/vim/vimrc.symlink ~/.vimrc
+ln -sfv ~/dotfiles/system/alias ~/.alias
+ln -sfv ~/dotfiles/system/functions ~/.functions
+ln -sfv ~/dotfiles/system/tmux.conf ~/.tmux.conf
+ln -sfv ~/dotfiles/git/gitconfig ~/.gitconfig
+
+# ZSH auto sugestions commands
+git clone git://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh/zsh-syntax-highlighting
+
+git clone https://github.com/zsh-users/zsh-history-substring-search ~/.zsh/zsh-history-substring-search
+
+# Vim plugins manager
+git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+vim +BundleInstall +qall
+
+# Globally install with npm
+packages=(
+  get-port-cli
+  gtop
+  historie
+  nodemon
+  npm
+  release-it
+  spot
+  superstatic
+  svgo
+  tldr
+  @angular/cli
+)
+
+sudo npm install -g "${packages[@]}"
+
+# Install porwerline fonts
+git clone https://github.com/powerline/fonts.git --depth=1 ~/fonts
+
+# install
+cd ~/fonts
+./install.sh
+
+# clean-up a bit
+cd ..
+rm -rf fonts
+
+# Terminal System Monitory
+wget https://github.com/nicolargo/glances/archive/v2.11.tar.gz -O - | tar xz
+cd glances-2.11
+sudo python setup.py install
+
+cd ..
+
+# Install oh-my-zsh via wget
+sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+
+cp ~/dotfiles/zsh/themes/my-fishy.zsh-theme ~/.oh-my-zsh/themes/my-fishy.zsh-theme
