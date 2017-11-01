@@ -13,10 +13,13 @@ git clone https://github.com/esauOp/dotfiles.git ~/dotfiles && cd ~/dotfiles
 ```
 sh ./install.sh
 ```
-2.- If you are an Ubuntu user, install script by
+2.- If you are an Ubuntu user, install by
 ```
 bash ./ubuntu_install
 ```
+
+And `reboot` after.
+
 3.- Change your shell
 ```
 chsh -s /bin/zsh
@@ -29,5 +32,3 @@ createuser -d postgres
 ### Don't forget generate your SSH Key
 
 [GitHub Help](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)
-
-
