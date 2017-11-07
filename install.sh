@@ -63,6 +63,7 @@ apps=(
   wifi-password
   zsh
   zsh-completions
+  yarn
 )
 
 brew install "${apps[@]}"
