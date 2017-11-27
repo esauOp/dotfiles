@@ -73,4 +73,4 @@ alias his="historie"
 alias week="date +%V"
 alias speedtest="wget -O /dev/null http://speed.transip.nl/100mb.bin"
 alias tm="tmux -2"
-
+alias cde="code ."

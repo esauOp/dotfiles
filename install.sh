@@ -43,6 +43,7 @@ apps=(
   mackup
   mitmproxy
   nano
+  nmap
   node
   pandoc
   peco
@@ -94,6 +95,7 @@ apps=(
   iterm2
   vlc
   postman
+  applepi-baker
 )
 
 for app in "${apps[@]}"
