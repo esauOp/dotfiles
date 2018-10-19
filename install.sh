@@ -93,6 +93,7 @@ apps=(
   gimp
   macdown
   iterm2
+  insomnia
   vlc
   postman
   applepi-baker
