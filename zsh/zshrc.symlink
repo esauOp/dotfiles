@@ -195,6 +195,11 @@ bindkey "^[[B" history-substring-search-down
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 
+bindkey "\e\eOC" forward-word
+bindkey "\e\eOD" backward-word
+# bindkey "^[a" beginning-of-line
+# bindkey "^[e" end-of-line
+
 if command -v tmux>/dev/null; then
   [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux -2
 fi
