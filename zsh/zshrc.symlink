@@ -212,3 +212,7 @@ source ~/.functions
 AUTOSUGGESTION_HIGHLIGHT_CURSOR=1
 AUTOSUGGESTION_ACCEPT_RIGHT_ARROW=1
 
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/esauop/.sdkman"
+[[ -s "/Users/esauop/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/esauop/.sdkman/bin/sdkman-init.sh"

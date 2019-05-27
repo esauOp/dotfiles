@@ -212,3 +212,6 @@ git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/theme
 
 # Edit your ~/.zshrc
 # ZSH_THEME="powerlevel9k/powerlevel9k"
+
+# SDKMAN!
+curl -s "https://get.sdkman.io" | bash
