@@ -151,6 +151,7 @@ ZSH=$HOME/.oh-my-zsh
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 export PATH=$PATH:/usr/local/node/bin
+export PATH=$HOME/bin:$PATH
 
 test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
 
@@ -172,7 +173,7 @@ export AUTOSUGGESTION_HIGHLIGHT_COLOR=fg=246
 source ~/.zsh/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 # Enabling plugins
-plugins=(git npm bundler osx rake ruby)
+plugins=(git npm bundler macos rake ruby)
 
 # Set the Theme
 ZSH_THEME="powerlevel9k/powerlevel9k"
@@ -214,12 +215,17 @@ AUTOSUGGESTION_ACCEPT_RIGHT_ARROW=1
 
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/esauop/.sdkman"
-[[ -s "/Users/esauop/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/esauop/.sdkman/bin/sdkman-init.sh"
+# /Users/esauortega/.sdkman/bin/sdkman-init.sh
+export SDKMAN_DIR="/Users/esauortega/.sdkman"
+[[ -s "/Users/esauortega/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/esauortega/.sdkman/bin/sdkman-init.sh"
 
 # Node Version Manager
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-eval "$(pyenv init -)"
+#eval "$(pyenv init -)"
+#
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

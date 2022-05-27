@@ -10,6 +10,7 @@
 	editor = nano
 
 [alias]
+  branches = "!$HOME/dotfiles/git/git-example"
   st = status
   sts = status -sb
   stl = ls-files -m -o --exclude-standard
@@ -30,10 +31,12 @@
   ld = "!sh -c \"git log --since '${1:-1} days ago' --oneline --author $(git config user.email)\" -"
   pr = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
   patch = !git --no-pager diff --no-color
+  wl = worktree list
+  wa = worktree add
 
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
