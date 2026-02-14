@@ -44,3 +44,5 @@
 
 [push]
 	default = matching
+[url "https://github.com"]
+	insteadOf = git://github.com

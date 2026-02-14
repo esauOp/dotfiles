@@ -24,8 +24,6 @@ apps=(
   coreutils
   diff-so-fancy
   dockutil
-  erlang
-  elixir
   ffmpeg
   fasd
   gifsicle
@@ -33,7 +31,6 @@ apps=(
   git-extras
   gnu-sed --with-default-names
   grep --with-default-names
-  heroku-toolbelt
   hub
   htop
   httpie
@@ -42,15 +39,11 @@ apps=(
   lynx
   mackup
   mitmproxy
-  nano
   nmap
-  node
   pandoc
   peco
-  pgcli
-  postgresql
-  psgrep
   python
+  ripgrep
   rvm
   shellcheck
   siege
@@ -64,7 +57,6 @@ apps=(
   wifi-password
   zsh
   zsh-completions
-  yarn
 )
 
 brew install "${apps[@]}"
@@ -83,20 +75,7 @@ brew cask install launchrocket
 
 #Install apps
 apps=(
-  arduino
-  slack
-  spotify
-  google-chrome
-  dropbox
-  appcleaner
-  firefox
-  gimp
-  macdown
-  iterm2
-  insomnia
-  vlc
   postman
-  applepi-baker
 )
 
 for app in "${apps[@]}"
@@ -155,22 +134,6 @@ git clone https://github.com/zsh-users/zsh-history-substring-search ~/.zsh/zsh-h
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 vim +BundleInstall +qall
 
-# Globally install with npm
-packages=(
-  get-port-cli
-  gtop
-  historie
-  nodemon
-  npm
-  release-it
-  spot
-  superstatic
-  svgo
-  tldr
-  underscore-cli
-)
-
-npm install -g "${packages[@]}"
 
 # Install porwerline fonts
 git clone https://github.com/powerline/fonts.git --depth=1 ~/fonts
@@ -194,13 +157,6 @@ cd ~/nerd-fonts
 cd ..
 rm -rf nerd-fonts
 
-# Terminal System Monitory
-wget https://github.com/nicolargo/glances/archive/v2.11.tar.gz -O - | tar xz
-cd glances-2.11
-sudo python setup.py install
-
-cd ..
-
 # Install oh-my-zsh via wget
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 
@@ -213,5 +169,3 @@ git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/theme
 # Edit your ~/.zshrc
 # ZSH_THEME="powerlevel9k/powerlevel9k"
 
-# SDKMAN!
-curl -s "https://get.sdkman.io" | bash
